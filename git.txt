@@ -1,0 +1,531 @@
+🟢 Git — رفع أي تعديل من VS Code إلى GitHub
+
+📍 أولًا: الأوامر دي بتتكتب فين؟
+
+الأوامر دي مش بتتحط داخل HTML أو CSS أو JavaScript.
+
+بتتكتب في:
+
+VS Code → Terminal
+
+الخطوات:
+
+1. افتح مشروعك في VS Code.
+2. عدّل في ملفات المشروع.
+3. احفظ التعديل.
+4. افتح Terminal.
+5. نفّذ الأوامر بالترتيب.
+
+---
+
+1️⃣ "git add ."
+
+إمتى أكتبه؟
+
+بعد ما تعمل أي تعديل في المشروع وتحفظه.
+
+بيعمل إيه؟
+
+بيقول لـGit:
+
+«"جهّز كل التغييرات اللي عملتها عشان أسجلها."»
+
+النقطة "." معناها:
+
+كل الملفات والتغييرات الموجودة في المشروع.
+
+---
+
+2️⃣ "git commit -m "update""
+
+إمتى أكتبه؟
+
+بعد "git add ." مباشرة.
+
+بيعمل إيه؟
+
+بيسجل التغييرات في Git كنسخة جديدة.
+
+كلمة ""update"" مجرد وصف للتعديل، وتقدر تغيرها حسب اللي عملته.
+
+أمثلة:
+
+"git commit -m "update navbar""
+
+"git commit -m "fix CSS""
+
+"git commit -m "add login page""
+
+---
+
+3️⃣ "git push"
+
+إمتى أكتبه؟
+
+بعد ما تعمل "commit".
+
+بيعمل إيه؟
+
+بيرفع الـCommit من جهازك إلى GitHub.
+
+يعني التعديل اللي عملته في VS Code يوصل للـRepository الموجود على GitHub.
+
+---
+
+🔄 الترتيب اللي تمشي عليه كل مرة
+
+كل ما تعدّل في مشروعك:
+
+عدّل في VS Code
+↓
+Save
+↓
+افتح Terminal
+↓
+git add .
+↓
+git commit -m "update"
+↓
+git push
+↓
+التعديل يترفع على GitHub
+
+---
+
+📝 مثال كامل
+
+لو عدّلت في "index.html" وحفظت:
+
+git add .
+git commit -m "update"
+git push
+
+وبس.
+
+---
+
+⚠️ مهم جدًا
+
+❌ لا تكتب أوامر Git داخل:
+
+"index.html"
+"master.css"
+"script.js"
+
+✅ اكتبها فقط في:
+
+VS Code → Terminal
+
+---
+
+🧠 احفظها كده
+
+"git add ."
+= جهّز التعديلات
+
+"git commit -m "update""
+= سجّل التعديلات
+
+"git push"
+= ارفع التعديلات إلى GitHub
+
+---
+
+📋 الأوامر الثلاثة — Copy / Paste
+
+git add .
+git commit -m "update"
+git push
+
+الترتيب مهم:
+
+① add → ② commit → ③ push
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+بيانات Git و GitHub
+
+Git
+
+اسم المستخدم:
+Ahmed
+
+الإيميل:
+ahmedmostafaldsoki@gmail.com
+
+كلمة السر:
+(           YW@t!ERZcWc_N4N                   )
+
+---
+
+GitHub
+
+اسم المستخدم:
+AhmedMostafaWeb
+
+الإيميل:
+ahmedmostafaldsoki@gmail.com
+
+كلمة السر:
+(            YW@t!ERZcWc_N4N                  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Git و GitHub + Visual Studio Code
+
+مرجع الأوامر والعلامات المهمة
+
+---
+
+🟦 أولًا: أوامر Git الأساسية
+
+1. بدء Git داخل المشروع
+
+git init
+
+المعنى:
+يبدأ استخدام Git داخل المشروع ويحوّل فولدر المشروع إلى Git Repository، بحيث يقدر Git يتابع الملفات والتعديلات ويسجل تاريخ المشروع.
+
+---
+
+2. معرفة حالة المشروع
+
+git status
+
+المعنى:
+يعرض حالة المشروع حاليًا، مثل الملفات الجديدة، والملفات المعدلة، والـBranch الذي تعمل عليه.
+
+---
+
+3. تجهيز الملفات
+
+git add .
+
+المعنى:
+يجهز كل الملفات والتعديلات الموجودة في المشروع علشان تدخل في Commit.
+
+النقطة "." معناها كل الملفات والتعديلات الموجودة داخل المشروع.
+
+---
+
+4. تسجيل نسخة من المشروع
+
+git commit -m "first commit"
+
+المعنى:
+يسجل نسخة محفوظة من حالة المشروع الحالية داخل Git.
+
+الجزء ""first commit"" هو رسالة بنكتبها علشان نعرف الـCommit ده كان خاص بإيه.
+
+---
+
+5. تعريف اسم المستخدم
+
+git config --global user.name "Ahmed"
+
+المعنى:
+يعرّف Git باسم صاحب الـCommits على الجهاز.
+
+---
+
+6. تعريف الإيميل
+
+git config --global user.email "ahmedmostafaldsoki@gmail.com"
+
+المعنى:
+يعرّف Git بإيميل صاحب الـCommits.
+
+---
+
+7. تسجيل الـCommit بعد تعريف البيانات
+
+git commit -m "first commit"
+
+المعنى:
+يسجل الـCommit بعد ما عرفنا Git باسمك وإيميلك، لأن المحاولة الأولى كانت فشلت بسبب عدم وجود بيانات الهوية.
+
+---
+
+8. تغيير اسم الـBranch إلى main
+
+git branch -M main
+
+المعنى:
+يغيّر اسم الـBranch الحالي إلى "main"، وهو الـBranch الرئيسي للمشروع.
+
+---
+
+9. معرفة الـBranch الحالي
+
+git branch
+
+المعنى:
+يعرض الـBranches الموجودة، والنجمة "*" بتوضح أنت واقف على أنهي Branch حاليًا.
+
+---
+
+10. ربط المشروع بـGitHub
+
+git remote add origin https://github.com/AhmedMostafaWeb/css.project.git
+
+المعنى:
+يربط مشروع Git الموجود على الكمبيوتر بالـRepository الموجود على GitHub.
+
+"origin" هو اسم مختصر للرابط الموجود على GitHub.
+
+---
+
+11. رفع المشروع إلى GitHub
+
+git push -u origin main
+
+المعنى:
+يرفع الـCommit والملفات من الكمبيوتر إلى GitHub، ويربط "main" المحلي بـ"origin/main".
+
+أول مرة ممكن يفتح المتصفح علشان تعمل تسجيل الدخول إلى GitHub.
+
+---
+
+12. التأكد من رابط GitHub
+
+git remote -v
+
+المعنى:
+يعرض رابط الـRepository المرتبط بالمشروع علشان تتأكد إن المشروع مربوط بالـRepository الصحيح على GitHub.
+
+---
+
+13. معرفة إعداد Credential Helper
+
+git config --global credential.helper
+
+المعنى:
+يعرض إعداد Git المسؤول عن طريقة إدارة بيانات تسجيل الدخول والمصادقة.
+
+---
+
+14. استخدام Credential Manager
+
+git config --global credential.helper manager
+
+المعنى:
+يخلي Git يستخدم Credential Manager لإدارة تسجيل الدخول والمصادقة مع GitHub.
+
+---
+
+🟩 ثانيًا: الحروف التي تظهر بجانب الملفات في Visual Studio Code
+
+M = Modified
+
+المعنى:
+الملف موجود أصلًا في Git، لكنك عدلت فيه حاجة بعد آخر Commit.
+
+مثال:
+
+M  index.html
+
+يعني:
+أنت عدلت "index.html" والتعديل الجديد لسه ما اتسجلش في Commit.
+
+---
+
+U = Untracked
+
+المعنى:
+الملف جديد، وGit لسه مش بيتابعه.
+
+مثال:
+
+U  login.html
+
+يعني:
+أنت عملت ملف جديد اسمه "login.html"، لكن Git لسه ما أضافوش للمشروع.
+
+---
+
+A = Added
+
+المعنى:
+الملف اتضاف إلى Git باستخدام "git add" وبقى جاهز يدخل في Commit.
+
+مثال:
+
+A  login.html
+
+يعني:
+الملف كان جديد، وبعد "git add" أصبح Git بيتابعه والملف جاهز للتسجيل.
+
+---
+
+🟨 ثالثًا: التسلسل اللي يحصل للملفات
+
+لما تعمل ملف جديد
+
+عملت ملف جديد
+      ↓
+U = Untracked
+      ↓
+git add .
+      ↓
+A = Added
+      ↓
+git commit
+      ↓
+الملف أصبح مسجل في Git
+
+---
+
+لما تعدل ملف موجود
+
+عدلت الملف
+      ↓
+M = Modified
+      ↓
+git add .
+      ↓
+التعديل أصبح جاهز للـCommit
+      ↓
+git commit
+      ↓
+التعديل أصبح مسجل في Git
+
+---
+
+⭐ رابعًا: كل الأوامر الـ14 بالترتيب
+
+git init
+git status
+git add .
+git commit -m "first commit"
+git config --global user.name "Ahmed"
+git config --global user.email "ahmedmostafaldsoki@gmail.com"
+git commit -m "first commit"
+git branch -M main
+git branch
+git remote add origin https://github.com/AhmedMostafaWeb/css.project.git
+git push -u origin main
+git remote -v
+git config --global credential.helper
+git config --global credential.helper manager
+
+---
+
+⭐ خامسًا: التسلسل المختصر لأول مشروع
+
+لو عندك مشروع جديد وعايز ترفعه على GitHub لأول مرة:
+
+git init
+git status
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin [رابط GitHub]
+git push -u origin main
+
+---
+
+⭐ سادسًا: التسلسل المختصر بعد ربط المشروع
+
+بعد ما المشروع يكون مربوط بالفعل بـGitHub، وأنت عملت تعديلات جديدة:
+
+git status
+git add .
+git commit -m "وصف التعديل"
+git push
+
+---
+
+🔥 الخلاصة السريعة
+
+U = ملف جديد وGit لسه مش بيتابعه.
+
+A = الملف اتضاف لـGit وبقى جاهز للـCommit.
+
+M = ملف موجود واتعمل فيه تعديل.
+
+git add . = جهّز التعديلات.
+
+git commit = سجّل التعديلات في Git.
+
+git push = ارفع التعديلات إلى GitHub.

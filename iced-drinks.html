@@ -1,0 +1,1877 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2b1b13">
+  <title>Iced Drinks | AUREN Café</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #2b1b13;
+      --bg-deep: #21140e;
+      --surface: #38261c;
+      --surface-light: #493326;
+      --brown: #24160f;
+      --gold: #c9a46a;
+      --gold-light: #e6d0a8;
+      --text: #f8efe5;
+      --muted: #c0ad9b;
+      --border: #604632;
+      --danger: #ff7777;
+      --shadow: 0 12px 32px rgba(0,0,0,.25);
+      --shadow-hover: 0 22px 45px rgba(0,0,0,.38);
+      --radius: 16px;
+      --transition: .28s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 4px;
+    }
+
+    .announcement {
+      padding: 10px 16px;
+      background: linear-gradient(110deg, #b58d54, #e6d0a8, #c9a46a);
+      color: #29190f;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(33,20,14,.96);
+      color: #fffaf3;
+      box-shadow: 0 5px 22px rgba(0,0,0,.2);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,164,106,.2);
+    }
+
+    .header-inner {
+      width: min(1200px, 92%);
+      min-height: 82px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--gold-light);
+      transition: color var(--transition);
+    }
+
+    .brand:hover .brand-name { color: var(--gold); }
+
+    .brand-subtitle {
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #d8c5b4;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    .main-nav a {
+      position: relative;
+      padding: 8px 0;
+      color: #f7eee4;
+      font-size: 13px;
+      transition: color var(--transition);
+    }
+
+    .main-nav a::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--gold);
+      content: "";
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active { color: var(--gold-light); }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after { transform: scaleX(1); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-button {
+      position: relative;
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(230,208,168,.35);
+      border-radius: 50%;
+      background: rgba(255,255,255,.025);
+      color: #fffaf3;
+      font-size: 20px;
+      transition: transform var(--transition), background var(--transition),
+        border-color var(--transition), color var(--transition);
+    }
+
+    .icon-button:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+      background: rgba(201,164,106,.15);
+      color: var(--gold-light);
+    }
+
+    .count-badge {
+      position: absolute;
+      top: -4px;
+      right: -3px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--bg-deep);
+      border-radius: 50px;
+      background: var(--gold);
+      color: var(--brown);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 370px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(31,19,13,.96), rgba(31,19,13,.78) 55%, rgba(31,19,13,.35)),
+        url("https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&fit=crop&w=1800&q=85") center 48% / cover;
+      color: #fffaf3;
+    }
+
+    .hero::after {
+      position: absolute;
+      right: -90px;
+      bottom: -170px;
+      width: 430px;
+      height: 430px;
+      border: 1px solid rgba(230,208,168,.23);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1200px, 92%);
+      margin: auto;
+      padding: 65px 0;
+      animation: hero-enter .8s ease both;
+    }
+
+    .eyebrow {
+      margin-bottom: 15px;
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 650px;
+      margin-bottom: 18px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .hero h1 span { color: var(--gold-light); }
+
+    .hero-description {
+      max-width: 520px;
+      margin-bottom: 28px;
+      color: #e1d4c8;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 23px;
+      border: 1px solid var(--gold);
+      border-radius: 5px;
+      background: linear-gradient(135deg, #e6d0a8, #c9a46a);
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 7px 18px rgba(0,0,0,.18);
+      transition: transform var(--transition), box-shadow var(--transition),
+        background var(--transition), color var(--transition);
+    }
+
+    .hero-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(0,0,0,.28);
+      background: transparent;
+      color: var(--gold-light);
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .benefit {
+      padding: 24px 15px;
+      background: var(--surface);
+      text-align: center;
+      transition: background var(--transition);
+    }
+
+    .benefit:hover { background: var(--surface-light); }
+
+    .benefit-icon {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gold-light);
+      font-size: 23px;
+    }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-family: "Playfair Display", serif;
+      font-size: 15px;
+    }
+
+    .benefit span:last-child {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .shop-section {
+      width: min(1200px, 92%);
+      margin: auto;
+      padding: 70px 0 85px;
+    }
+
+    .section-heading {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .section-heading .eyebrow {
+      margin-bottom: 10px;
+      color: var(--gold);
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      color: var(--gold-light);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(30px, 4vw, 42px);
+      font-weight: 600;
+    }
+
+    .section-heading p {
+      max-width: 580px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 35px 0 25px;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 390px;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    .search-input,
+    .sort-select {
+      width: 100%;
+      min-height: 47px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 12px;
+      transition: border-color var(--transition), box-shadow var(--transition),
+        background var(--transition);
+    }
+
+    .search-input { padding: 12px 15px 12px 42px; }
+
+    .search-input::placeholder { color: #b19a86; }
+
+    .sort-select {
+      width: 205px;
+      padding: 12px 35px 12px 12px;
+      border-color: var(--gold);
+      color: var(--gold-light);
+      cursor: pointer;
+      color-scheme: dark;
+      accent-color: var(--gold);
+    }
+
+    .sort-select option {
+      background: #38261c;
+      color: #f8efe5;
+    }
+
+    .sort-select option:checked {
+      background: #c9a46a;
+      color: #24160f;
+    }
+
+    .search-input:focus,
+    .sort-select:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 0 3px rgba(201,164,106,.15);
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .results-count {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .filter-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .filter-btn {
+      padding: 11px 17px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: linear-gradient(145deg, #3b291f, #302016);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,.12);
+      transition: transform var(--transition), border-color var(--transition),
+        background var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      box-shadow: 0 7px 16px rgba(0,0,0,.2);
+    }
+
+    .filter-btn.active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #e6d0a8, #c9a46a);
+      color: var(--brown);
+      box-shadow: 0 5px 15px rgba(201,164,106,.17);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: stretch;
+      gap: 25px;
+    }
+
+    .product-card {
+      min-width: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(201,164,106,.2);
+      border-radius: var(--radius);
+      background: linear-gradient(150deg, #402d21, #302016);
+      box-shadow: 0 8px 22px rgba(0,0,0,.19);
+      isolation: isolate;
+      animation: card-enter .5s both;
+      transition: transform .35s ease, box-shadow .35s ease,
+        border-color .35s ease, background .35s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(230,208,168,.8);
+      background: linear-gradient(150deg, #493326, #342217);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .product-image-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 4.5;
+      background: #4a3528;
+    }
+
+    .product-image-wrap::after {
+      position: absolute;
+      inset: 45% 0 0;
+      z-index: 1;
+      background: linear-gradient(transparent, rgba(28,17,11,.22));
+      content: "";
+      pointer-events: none;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .65s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.075);
+      filter: saturate(1.08);
+    }
+
+    .product-label {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      z-index: 2;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 5px;
+      background: rgba(230,208,168,.96);
+      color: #3c281b;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    }
+
+    .favorite-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 3;
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 50%;
+      background: rgba(43,27,19,.88);
+      color: #fff1dc;
+      font-size: 22px;
+      box-shadow: 0 5px 15px rgba(0,0,0,.22);
+      backdrop-filter: blur(8px);
+      transition: transform var(--transition), background var(--transition),
+        color var(--transition), border-color var(--transition);
+    }
+
+    .favorite-btn:hover {
+      transform: scale(1.1);
+      border-color: #ff9b9b;
+      background: #4b2925;
+      color: var(--danger);
+    }
+
+    .favorite-btn.is-favorite {
+      border-color: #a65c51;
+      background: #4b2925;
+      color: var(--danger);
+      animation: heart-pop .3s ease;
+    }
+
+    .product-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 19px 16px 17px;
+    }
+
+    .product-category {
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .product-name {
+      min-height: 46px;
+      margin-bottom: 9px;
+      color: var(--text);
+      font-family: "Playfair Display", serif;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .product-description {
+      flex: 1;
+      min-height: 58px;
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 17px;
+      padding-top: 13px;
+      border-top: 1px solid rgba(201,164,106,.17);
+    }
+
+    .product-price {
+      color: var(--gold-light);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .product-size {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .card-btn {
+      position: relative;
+      overflow: hidden;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--gold);
+      border-radius: 7px;
+      background: transparent;
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      transition: transform var(--transition), background var(--transition),
+        color var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .card-btn:hover {
+      transform: translateY(-2px);
+      background: var(--gold);
+      color: var(--brown);
+      box-shadow: 0 7px 15px rgba(0,0,0,.18);
+    }
+
+    .card-btn:active { transform: translateY(0) scale(.98); }
+
+    .card-btn.primary {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #e6d0a8, #c9a46a);
+      color: var(--brown);
+    }
+
+    .card-btn.primary:hover {
+      border-color: var(--gold-light);
+      background: var(--gold-light);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 65px 20px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+      animation: card-enter .4s ease both;
+    }
+
+    .empty-state span {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 35px;
+    }
+
+    .empty-state h3 {
+      margin-bottom: 8px;
+      color: var(--gold-light);
+      font-family: "Playfair Display", serif;
+      font-size: 25px;
+    }
+
+    .empty-state p { font-size: 13px; }
+
+    .story-section {
+      padding: 65px 4%;
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .story-section .eyebrow { color: var(--gold); }
+
+    .story-section h2 {
+      margin-bottom: 15px;
+      color: var(--gold-light);
+      font-family: "Playfair Display", serif;
+      font-size: clamp(28px, 4vw, 38px);
+    }
+
+    .story-section p {
+      max-width: 640px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    /* Product details modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(12,7,4,.82);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .product-modal {
+      position: relative;
+      overflow-y: auto;
+      width: min(780px, 100%);
+      max-height: 90vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid rgba(201,164,106,.35);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: 0 25px 80px rgba(0,0,0,.5);
+      animation: modal-in .3s ease both;
+    }
+
+    .modal-image-wrap {
+      min-height: 400px;
+      background: #4a3528;
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      align-self: center;
+      padding: 35px 28px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 39px;
+      height: 39px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--gold-light);
+      font-size: 23px;
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .modal-close:hover {
+      transform: rotate(90deg);
+      background: var(--brown);
+    }
+
+    .modal-content h2 {
+      margin: 8px 0 12px;
+      color: var(--gold-light);
+      font-family: "Playfair Display", serif;
+      font-size: 29px;
+      line-height: 1.25;
+    }
+
+    .modal-price {
+      margin-bottom: 17px;
+      color: var(--gold);
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .modal-description {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .modal-detail-list {
+      margin-bottom: 8px;
+      list-style: none;
+    }
+
+    .modal-detail-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .modal-detail-list strong { color: var(--gold-light); }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 200;
+      max-width: calc(100% - 44px);
+      padding: 15px 20px;
+      border: 1px solid var(--gold);
+      border-left: 4px solid var(--gold);
+      border-radius: 9px;
+      background: #38261c;
+      color: var(--text);
+      font-size: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(15px);
+      transition: opacity .25s, transform .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes card-enter {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes hero-enter {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(15px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes heart-pop {
+      0% { transform: scale(.8); }
+      65% { transform: scale(1.18); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 1000px) {
+      .main-nav { gap: 15px; }
+
+      .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 19px;
+      }
+
+      .header-inner { gap: 15px; }
+      .brand-name { font-size: 26px; }
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        min-height: 72px;
+        flex-wrap: wrap;
+        padding: 12px 0;
+      }
+
+      .brand-name { font-size: 24px; }
+      .brand-subtitle { font-size: 8px; }
+
+      .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 18px;
+        padding-bottom: 3px;
+      }
+
+      .main-nav a { font-size: 12px; }
+      .header-actions { margin-left: auto; }
+
+      .icon-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .hero {
+        min-height: 320px;
+        background-position: 60% center;
+      }
+
+      .hero-inner { padding: 50px 0; }
+      .hero-description { font-size: 13px; }
+
+      .shop-section { padding: 48px 0 60px; }
+
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+      }
+
+      .product-info { padding: 14px 12px; }
+      .product-name { min-height: 40px; font-size: 15px; }
+      .product-description { min-height: 65px; font-size: 10px; }
+      .product-price { font-size: 15px; }
+
+      .toolbar { align-items: stretch; flex-direction: column; }
+      .search-wrap { max-width: none; }
+      .toolbar-right { justify-content: space-between; }
+      .sort-select { width: 190px; }
+
+      .filter-row {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .filter-btn { padding: 9px 12px; font-size: 10px; }
+    }
+
+    @media (max-width: 480px) {
+      .announcement {
+        font-size: 9px;
+        letter-spacing: 1.2px;
+      }
+
+      .main-nav { gap: 14px; }
+      .main-nav a { font-size: 11px; }
+      .hero h1 { font-size: 39px; }
+
+      .benefit { padding: 18px 7px; }
+      .benefit strong { font-size: 12px; }
+      .benefit span:last-child { font-size: 9px; }
+      .section-heading p { font-size: 12px; }
+
+      .products-grid { gap: 11px; }
+
+      .product-image-wrap { aspect-ratio: 4 / 4.7; }
+
+      .product-label {
+        top: 7px;
+        left: 7px;
+        padding: 5px 6px;
+        font-size: 8px;
+      }
+
+      .favorite-btn {
+        top: 7px;
+        right: 7px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+      }
+
+      .product-category { font-size: 8px; }
+      .product-name { font-size: 14px; }
+      .product-info { padding: 12px 10px; }
+      .product-bottom { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .product-description { min-height: 74px; }
+      .card-btn { min-height: 39px; padding: 8px 5px; font-size: 10px; }
+
+      .product-modal {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        border-radius: 14px;
+      }
+
+      .modal-image-wrap {
+        min-height: 230px;
+        max-height: 250px;
+      }
+
+      .modal-image {
+        min-height: 230px;
+        max-height: 250px;
+      }
+
+      .modal-content { padding: 24px 22px; }
+      .modal-content h2 { font-size: 25px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="announcement">
+    A little luxury in every sip — welcome to AUREN Café
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="AUREN Café home">
+        <span class="brand-name">AUREN</span>
+        <span class="brand-subtitle">Coffee · Crafted with care</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="hot-coffee.html">Hot Coffee</a>
+        <a href="iced-drinks.html" class="active">Iced Drinks</a>
+        <a href="#our-story">Our Story</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button" id="favoritesHeaderBtn"
+          type="button" aria-label="Show favorites" title="Show favorites">
+          ♡
+          <span class="count-badge" id="favoriteCount">0</span>
+        </button>
+
+        <button class="icon-button" id="resetFavoritesBtn"
+          type="button" aria-label="Show all products" title="Show all products">
+          ⌂
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Cool moments, beautifully made</p>
+        <h1>Discover Your<br><span>Perfect Iced Drink</span></h1>
+        <p class="hero-description">
+          From smooth iced coffee to refreshing fruit blends, discover
+          handcrafted favorites made to brighten your day.
+        </p>
+        <a class="hero-button" href="#iced-menu">
+          Explore the Menu <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="benefits" aria-label="Our promises">
+      <div class="benefit">
+        <span class="benefit-icon">❄</span>
+        <strong>Freshly Prepared</strong>
+        <span>Made fresh when you order</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">✦</span>
+        <strong>Premium Ingredients</strong>
+        <span>Carefully selected for flavor</span>
+      </div>
+      <div class="benefit">
+        <span class="benefit-icon">♡</span>
+        <strong>Made with Care</strong>
+        <span>Your daily moment of comfort</span>
+      </div>
+    </section>
+
+    <section class="shop-section" id="iced-menu">
+      <div class="section-heading">
+        <p class="eyebrow">The AUREN collection</p>
+        <h2>Our Iced Drinks</h2>
+        <p>
+          Find your new favorite. Every cup is thoughtfully crafted,
+          beautifully served, and ready to make your day a little better.
+        </p>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input class="search-input" id="searchInput" type="search"
+            placeholder="Search iced drinks..." aria-label="Search iced drinks">
+        </label>
+
+        <div class="toolbar-right">
+          <span class="results-count" id="resultsCount">20 drinks</span>
+          <select class="sort-select" id="sortSelect" aria-label="Sort products">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-row" id="filterRow" aria-label="Filter by category">
+        <button class="filter-btn active" type="button" data-category="All">All Drinks</button>
+        <button class="filter-btn" type="button" data-category="Iced Coffee">Iced Coffee</button>
+        <button class="filter-btn" type="button" data-category="Cold Brew">Cold Brew</button>
+        <button class="filter-btn" type="button" data-category="Frappes">Frappes</button>
+        <button class="filter-btn" type="button" data-category="Refreshers">Refreshers</button>
+        <button class="filter-btn" type="button" data-category="Tea">Iced Tea</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="story-section" id="our-story">
+      <p class="eyebrow">A moment just for you</p>
+      <h2>Good Drinks. Better Moments.</h2>
+      <p>
+        At AUREN Café, we believe the little things matter. A perfectly
+        chilled drink, carefully chosen ingredients, and a flavor worth
+        coming back for. Explore the collection and find your moment.
+      </p>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <section class="product-modal" role="dialog"
+      aria-modal="true" aria-labelledby="modalTitle">
+
+      <button class="modal-close" id="modalClose" type="button"
+        aria-label="Close product details">×</button>
+
+      <div class="modal-image-wrap">
+        <img class="modal-image" id="modalImage" src="" alt="">
+      </div>
+
+      <div class="modal-content">
+        <p class="product-category" id="modalCategory"></p>
+        <h2 id="modalTitle">Drink name</h2>
+        <p class="modal-price" id="modalPrice"></p>
+        <p class="modal-description" id="modalDescription"></p>
+
+        <ul class="modal-detail-list">
+          <li><strong>Size:</strong> <span id="modalSize"></span></li>
+          <li><strong>Temperature:</strong> Served chilled</li>
+          <li><strong>Prepared:</strong> Fresh to order</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+
+    const products = [
+      {
+        id: 1, name: "Classic Iced Latte", category: "Iced Coffee",
+        price: 95, size: "350 ml", label: "Bestseller",
+        description: "Smooth espresso blended with chilled milk over ice.",
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 2, name: "Iced Caramel Macchiato", category: "Iced Coffee",
+        price: 115, size: "350 ml", label: "Popular",
+        description: "Espresso, creamy milk, and a delicious caramel finish.",
+        image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 3, name: "Iced Spanish Latte", category: "Iced Coffee",
+        price: 120, size: "350 ml", label: "Favorite",
+        description: "Rich espresso with silky milk and a touch of sweetness.",
+        image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 4, name: "Iced Mocha", category: "Iced Coffee",
+        price: 110, size: "350 ml", label: "",
+        description: "A lovely combination of espresso, chocolate, and milk.",
+        image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 5, name: "Vanilla Iced Latte", category: "Iced Coffee",
+        price: 110, size: "350 ml", label: "",
+        description: "Classic iced latte with a soft and fragrant vanilla note.",
+        image: "https://images.unsplash.com/photo-1461988625982-7e46a099bf4f?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 6, name: "Hazelnut Iced Coffee", category: "Iced Coffee",
+        price: 115, size: "350 ml", label: "Must Try",
+        description: "Chilled coffee with a warm, nutty hazelnut flavor.",
+        image: "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 7, name: "Classic Cold Brew", category: "Cold Brew",
+        price: 100, size: "350 ml", label: "Slow Brewed",
+        description: "Slow-steeped coffee with a smooth taste and gentle finish.",
+        image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 8, name: "Vanilla Sweet Cream Brew", category: "Cold Brew",
+        price: 125, size: "350 ml", label: "",
+        description: "Smooth cold brew topped with a soft vanilla cream.",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 9, name: "Iced Americano", category: "Cold Brew",
+        price: 80, size: "350 ml", label: "Classic",
+        description: "Espresso and cold water over ice for a crisp coffee taste.",
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 10, name: "Chocolate Chip Frappe", category: "Frappes",
+        price: 135, size: "400 ml", label: "Indulgent",
+        description: "A creamy blended chocolate drink with chocolate chips.",
+        image: "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 11, name: "Caramel Coffee Frappe", category: "Frappes",
+        price: 140, size: "400 ml", label: "Bestseller",
+        description: "Blended coffee with creamy caramel flavor and ice.",
+        image: "https://images.unsplash.com/photo-1462917882517-e150004895fa?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 12, name: "Mocha Cookie Frappe", category: "Frappes",
+        price: 145, size: "400 ml", label: "",
+        description: "Chocolate coffee frappe with a rich cookie-inspired taste.",
+        image: "https://images.unsplash.com/photo-1557142046-c704a3adf364?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 13, name: "Strawberry Cream Frappe", category: "Frappes",
+        price: 130, size: "400 ml", label: "Fruity",
+        description: "A chilled, creamy strawberry treat with a fruity finish.",
+        image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 14, name: "Mango Passion Refresher", category: "Refreshers",
+        price: 105, size: "400 ml", label: "Refreshing",
+        description: "A bright tropical blend inspired by mango and passion fruit.",
+        image: "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 15, name: "Fresh Lemon Mint", category: "Refreshers",
+        price: 75, size: "400 ml", label: "Fresh",
+        description: "A crisp lemon drink with cooling mint and plenty of ice.",
+        image: "https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 16, name: "Berry Hibiscus Cooler", category: "Refreshers",
+        price: 100, size: "400 ml", label: "",
+        description: "A refreshing berry-inspired cooler with floral notes.",
+        image: "https://images.unsplash.com/photo-1516594798947-e65505dbb29d?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 17, name: "Peach Iced Tea", category: "Tea",
+        price: 85, size: "400 ml", label: "Classic",
+        description: "Lightly sweet iced tea with a delicate peach flavor.",
+        image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 18, name: "Lemon Iced Tea", category: "Tea",
+        price: 80, size: "400 ml", label: "",
+        description: "Refreshing chilled tea with a bright citrus finish.",
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 19, name: "Matcha Iced Latte", category: "Tea",
+        price: 125, size: "350 ml", label: "Signature",
+        description: "Earthy matcha balanced with creamy chilled milk.",
+        image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=85"
+      },
+      {
+        id: 20, name: "Iced Chai Latte", category: "Tea",
+        price: 110, size: "350 ml", label: "",
+        description: "Chilled milk with warming chai-inspired spice notes.",
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=85&sat=-20"
+      }
+    ];
+
+    function createFallbackImage(product) {
+      const colors = {
+        "Iced Coffee": ["#c9a46a", "#4c2d20"],
+        "Cold Brew": ["#b98a61", "#2b1b13"],
+        "Frappes": ["#e0c2a2", "#65432e"],
+        "Refreshers": ["#e7c7a0", "#8b493b"],
+        "Tea": ["#c6c49b", "#556345"]
+      };
+
+      const palette = colors[product.category] || ["#c9a46a", "#2b1b13"];
+
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="700" height="800" viewBox="0 0 700 800">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${palette[0]}"/>
+              <stop offset="100%" stop-color="${palette[1]}"/>
+            </linearGradient>
+          </defs>
+          <rect width="700" height="800" fill="url(#bg)"/>
+          <circle cx="570" cy="130" r="170" fill="#ffffff" opacity=".08"/>
+          <circle cx="100" cy="690" r="220" fill="#ffffff" opacity=".06"/>
+          <text x="350" y="340" text-anchor="middle" font-size="150">🥤</text>
+          <text x="350" y="440" text-anchor="middle" font-family="Georgia,serif"
+            font-size="34" fill="#fff8ec">${product.name}</text>
+          <text x="350" y="495" text-anchor="middle" font-family="Arial,sans-serif"
+            font-size="22" letter-spacing="5" fill="#f1dfc3">AUREN CAFÉ</text>
+        </svg>`;
+
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+    }
+
+    const productsGrid = document.getElementById("productsGrid");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const resultsCount = document.getElementById("resultsCount");
+    const filterRow = document.getElementById("filterRow");
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalImage = document.getElementById("modalImage");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalSize = document.getElementById("modalSize");
+    const toast = document.getElementById("toast");
+
+    let selectedCategory = "All";
+    let favoritesOnly = false;
+    let activeProductId = null;
+    let toastTimeout;
+
+    function readFavorites() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("aurenIcedFavorites"));
+        return Array.isArray(saved) ? saved : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    let favorites = readFavorites();
+
+    function saveFavorites() {
+      try {
+        localStorage.setItem("aurenIcedFavorites", JSON.stringify(favorites));
+      } catch (error) {
+        showToast("Your browser could not save favorites.");
+      }
+
+      updateFavoriteCount();
+    }
+
+    function updateFavoriteCount() {
+      document.getElementById("favoriteCount").textContent = favorites.length;
+    }
+
+    function formatPrice(price) {
+      return `${price} EGP`;
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, function (character) {
+        const entities = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        };
+
+        return entities[character];
+      });
+    }
+
+    function getFilteredProducts() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+
+      let filtered = products.filter(function (product) {
+        const matchesCategory =
+          selectedCategory === "All" || product.category === selectedCategory;
+
+        const matchesSearch =
+          product.name.toLowerCase().includes(searchTerm) ||
+          product.category.toLowerCase().includes(searchTerm) ||
+          product.description.toLowerCase().includes(searchTerm);
+
+        const matchesFavorites =
+          !favoritesOnly || favorites.includes(product.id);
+
+        return matchesCategory && matchesSearch && matchesFavorites;
+      });
+
+      if (sortSelect.value === "price-low") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortSelect.value === "price-high") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortSelect.value === "name") {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      return filtered;
+    }
+
+    function renderProducts() {
+      const filteredProducts = getFilteredProducts();
+
+      resultsCount.textContent =
+        `${filteredProducts.length} ${filteredProducts.length === 1 ? "drink" : "drinks"}`;
+
+      if (favoritesOnly) {
+        resultsCount.textContent += " · Favorites";
+      }
+
+      if (filteredProducts.length === 0) {
+        productsGrid.innerHTML = `
+          <div class="empty-state">
+            <span>☕</span>
+            <h3>No drinks found</h3>
+            <p>Try another search or choose a different category.</p>
+          </div>
+        `;
+        return;
+      }
+
+      productsGrid.innerHTML = filteredProducts.map(function (product, index) {
+        const isFavorite = favorites.includes(product.id);
+
+        return `
+          <article class="product-card" data-id="${product.id}"
+            style="animation-delay:${Math.min(index * 45, 360)}ms">
+            <div class="product-image-wrap">
+              <img
+                class="product-image"
+                src="${escapeHTML(product.image)}"
+                alt="${escapeHTML(product.name)}"
+                loading="lazy"
+                data-product-id="${product.id}"
+              >
+
+              ${product.label ? `
+                <span class="product-label">${escapeHTML(product.label)}</span>
+              ` : ""}
+
+              <button
+                class="favorite-btn ${isFavorite ? "is-favorite" : ""}"
+                type="button"
+                data-action="favorite"
+                data-id="${product.id}"
+                aria-label="${isFavorite ? "Remove from" : "Add to"} favorites"
+                aria-pressed="${isFavorite}"
+                title="${isFavorite ? "Remove from favorites" : "Add to favorites"}"
+              >${isFavorite ? "♥" : "♡"}</button>
+            </div>
+
+            <div class="product-info">
+              <p class="product-category">${escapeHTML(product.category)}</p>
+              <h3 class="product-name">${escapeHTML(product.name)}</h3>
+              <p class="product-description">${escapeHTML(product.description)}</p>
+
+              <div class="product-bottom">
+                <span class="product-price">${formatPrice(product.price)}</span>
+                <span class="product-size">${escapeHTML(product.size)}</span>
+              </div>
+
+              <div class="card-actions">
+                <button class="card-btn primary" type="button"
+                  data-action="details" data-id="${product.id}">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      attachImageFallbacks();
+    }
+
+    function attachImageFallbacks() {
+      const images = productsGrid.querySelectorAll("img[data-product-id]");
+
+      images.forEach(function (image) {
+        image.addEventListener("error", function () {
+          const productId = Number(image.dataset.productId);
+          const product = products.find(item => item.id === productId);
+
+          if (!product) return;
+
+          image.onerror = null;
+          image.src = createFallbackImage(product);
+        }, { once: true });
+      });
+    }
+
+    function toggleFavorite(productId) {
+      const product = products.find(item => item.id === productId);
+      if (!product) return;
+
+      if (favorites.includes(productId)) {
+        favorites = favorites.filter(id => id !== productId);
+        showToast(`${product.name} removed from favorites.`);
+      } else {
+        favorites.push(productId);
+        showToast(`${product.name} added to favorites.`);
+      }
+
+      saveFavorites();
+      renderProducts();
+    }
+
+    function openProductDetails(productId) {
+      const product = products.find(item => item.id === productId);
+      if (!product) return;
+
+      activeProductId = productId;
+
+      modalImage.onerror = function () {
+        modalImage.onerror = null;
+        modalImage.src = createFallbackImage(product);
+      };
+
+      modalImage.src = product.image;
+      modalImage.alt = product.name;
+      modalCategory.textContent = product.category;
+      modalTitle.textContent = product.name;
+      modalPrice.textContent = formatPrice(product.price);
+      modalDescription.textContent = product.description;
+      modalSize.textContent = product.size;
+
+      modalBackdrop.classList.add("open");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      document.getElementById("modalClose").focus();
+    }
+
+    function closeProductDetails() {
+      modalBackdrop.classList.remove("open");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      activeProductId = null;
+    }
+
+    function showToast(message) {
+      clearTimeout(toastTimeout);
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      toastTimeout = setTimeout(function () {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+    filterRow.addEventListener("click", function (event) {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+
+      selectedCategory = button.dataset.category;
+      favoritesOnly = false;
+
+      document.querySelectorAll(".filter-btn").forEach(function (filter) {
+        filter.classList.toggle("active", filter === button);
+      });
+
+      document.getElementById("favoritesHeaderBtn").style.color = "";
+      renderProducts();
+    });
+
+    searchInput.addEventListener("input", renderProducts);
+    sortSelect.addEventListener("change", renderProducts);
+
+    productsGrid.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const productId = Number(button.dataset.id);
+      const action = button.dataset.action;
+
+      if (action === "favorite") {
+        toggleFavorite(productId);
+      } else if (action === "details") {
+        openProductDetails(productId);
+      }
+    });
+
+    document.getElementById("favoritesHeaderBtn").addEventListener("click", function () {
+      favoritesOnly = !favoritesOnly;
+      selectedCategory = "All";
+
+      document.querySelectorAll(".filter-btn").forEach(function (filter) {
+        filter.classList.toggle("active", filter.dataset.category === "All");
+      });
+
+      this.style.color = favoritesOnly ? "#e6d0a8" : "";
+      renderProducts();
+
+      document.getElementById("iced-menu").scrollIntoView({ behavior: "smooth" });
+
+      showToast(favoritesOnly
+        ? "Showing your favorite drinks."
+        : "Showing all drinks.");
+    });
+
+    document.getElementById("resetFavoritesBtn").addEventListener("click", function () {
+      favoritesOnly = false;
+      selectedCategory = "All";
+      searchInput.value = "";
+      sortSelect.value = "featured";
+
+      document.querySelectorAll(".filter-btn").forEach(function (filter) {
+        filter.classList.toggle("active", filter.dataset.category === "All");
+      });
+
+      document.getElementById("favoritesHeaderBtn").style.color = "";
+      renderProducts();
+
+      document.getElementById("iced-menu").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("modalClose").addEventListener("click", closeProductDetails);
+
+    modalBackdrop.addEventListener("click", function (event) {
+      if (event.target === modalBackdrop) {
+        closeProductDetails();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && modalBackdrop.classList.contains("open")) {
+        closeProductDetails();
+      }
+    });
+
+    updateFavoriteCount();
+    renderProducts();
+  </script>
+  
+<style>
+/* AUREN CAFE - UNIVERSAL FOOTER */
+.auren-footer {
+    background: #2b211d;
+    color: #f5eee5;
+    font-family: Arial, sans-serif;
+    margin-top: 70px;
+}
+
+.auren-footer * {
+    box-sizing: border-box;
+}
+
+.auren-footer a {
+    color: #e8d9c5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auren-footer a:hover {
+    color: #d6ad70;
+}
+
+.auren-footer-main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 55px 25px 40px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 35px;
+}
+
+.auren-footer-logo {
+    color: #d6ad70;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin: 0 0 18px;
+}
+
+.auren-footer-description {
+    color: #d2c5b9;
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 300px;
+    margin: 0;
+}
+
+.auren-footer-title {
+    color: #d6ad70;
+    font-size: 17px;
+    margin: 5px 0 22px;
+    font-weight: bold;
+}
+
+.auren-footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    font-size: 14px;
+}
+
+.auren-footer-contact p {
+    color: #e8d9c5;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 12px;
+    overflow-wrap: anywhere;
+}
+
+.auren-footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.auren-footer-social a {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #8e755e;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.auren-footer-social a:hover {
+    background: #d6ad70;
+    color: #2b211d;
+    border-color: #d6ad70;
+}
+
+.auren-footer-bottom {
+    border-top: 1px solid #514038;
+    max-width: 1200px;
+    margin: auto;
+    padding: 22px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.auren-footer-bottom p {
+    color: #c8b9ab;
+    font-size: 13px;
+    margin: 0;
+}
+
+.auren-footer-bottom a {
+    font-size: 13px;
+}
+
+/* TABLET */
+@media (max-width: 850px) {
+    .auren-footer-main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 35px 25px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+    .auren-footer-main {
+        grid-template-columns: 1fr;
+        padding: 40px 22px 30px;
+        gap: 30px;
+    }
+
+    .auren-footer-logo {
+        font-size: 27px;
+    }
+
+    .auren-footer-title {
+        margin-bottom: 15px;
+    }
+
+    .auren-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+}
+</style>
+
+<footer class="auren-footer">
+    <div class="auren-footer-main">
+
+        <!-- BRAND -->
+        <div>
+            <h2 class="auren-footer-logo">AUREN</h2>
+            <p class="auren-footer-description">
+                Every cup tells a story. Discover your favorite
+                coffee, freshly prepared with passion and care.
+            </p>
+
+            <div class="auren-footer-social">
+                <a href="https://www.instagram.com/"
+                   target="_blank" rel="noopener"
+                   aria-label="Instagram">IG</a>
+
+                <a href="https://www.facebook.com/"
+                   target="_blank" rel="noopener"
+                   aria-label="Facebook">FB</a>
+
+                <a href="https://www.tiktok.com/"
+                   target="_blank" rel="noopener"
+                   aria-label="TikTok">TK</a>
+            </div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div>
+            <h3 class="auren-footer-title">Quick Links</h3>
+            <nav class="auren-footer-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Our Menu</a>
+                <a href="hot-coffee.html">Hot Coffee</a>
+                <a href="iced-drinks.html">Cold Coffee</a>
+                <a href="special-offers.html">Special Offers</a>
+                <a href="bakery.html">Bakery</a>
+            </nav>
+        </div>
+
+        <!-- INFORMATION -->
+        <div>
+            <h3 class="auren-footer-title">Explore</h3>
+            <nav class="auren-footer-links">
+                <a href="index.html#about">Our Story</a>
+                <a href="index.html#visit">Visit Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="special-offers.html">Latest Offers</a>
+            </nav>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="auren-footer-contact">
+            <h3 class="auren-footer-title">Get In Touch</h3>
+            <p>📍 Cairo, Egypt</p>
+            <p>🕒 Daily: 9 AM – 11 PM</p>
+            <p>
+                ✉️ <a href="mailto:hello@aurencafe.com">
+                    hello@aurencafe.com
+                </a>
+            </p>
+            <p>
+                ☎️ <a href="tel:+201000000000">
+                    +20 100 000 0000
+                </a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="auren-footer-bottom">
+        <p>
+            © <span class="auren-footer-year">2026</span>
+            AUREN Café. All rights reserved.
+        </p>
+        <a href="index.html">Made with care for coffee lovers ☕</a>
+    </div>
+</footer>
+
+<script>
+document.querySelectorAll(".auren-footer-year").forEach(function (year) {
+    year.textContent = new Date().getFullYear();
+});
+</script>
+
+</body>
+</html>

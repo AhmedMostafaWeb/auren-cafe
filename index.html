@@ -1,0 +1,2647 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#211a16">
+<meta name="description" content="Discover AUREN Café — specialty coffee, signature drinks, freshly baked treats, and beautiful everyday moments.">
+<title>AUREN Café | Good Coffee. Better Moments.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+:root {
+    --brown: #211a16;
+    --brown-light: #35271f;
+    --brown-soft: #49352a;
+    --gold: #b99560;
+    --gold-light: #ddc49a;
+    --cream: #f8f5ef;
+    --cream-dark: #eee5d8;
+    --text: #382b23;
+    --muted: #857366;
+    --white: #fff;
+    --border: #e4d9cb;
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "DM Sans", Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 95px;
+}
+
+body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.7;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+section {
+    scroll-margin-top: 85px;
+}
+
+.section-pad {
+    padding: 100px 7%;
+}
+
+.eyebrow {
+    color: #9b7549;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    line-height: 1.8;
+}
+
+h1, h2, h3 {
+    font-weight: 500;
+}
+
+h2 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4.2vw, 58px);
+    line-height: 1.17;
+}
+
+h2 em, h1 em {
+    color: var(--gold);
+    font-weight: 400;
+}
+
+p {
+    overflow-wrap: break-word;
+}
+
+.button {
+    min-height: 49px;
+    padding: 13px 23px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    border: 1px solid transparent;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .4px;
+    cursor: pointer;
+    transition: background .25s, color .25s, transform .25s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.button-gold {
+    background: var(--gold);
+    color: #211a16;
+}
+
+.button-gold:hover {
+    background: var(--gold-light);
+}
+
+.button-dark {
+    background: var(--brown);
+    color: var(--cream);
+}
+
+.button-dark:hover {
+    background: var(--brown-soft);
+}
+
+.button-outline {
+    border-color: rgba(255,255,255,.65);
+    color: var(--white);
+}
+
+.button-outline:hover {
+    background: var(--white);
+    color: var(--brown);
+}
+
+.button-outline-light {
+    border-color: var(--gold);
+    color: var(--cream);
+}
+
+.button-outline-light:hover {
+    background: var(--gold);
+    color: var(--brown);
+}
+
+.underlined-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.underlined-link span {
+    color: var(--gold);
+}
+
+.announcement-bar {
+    padding: 8px 15px;
+    background: var(--brown);
+    color: #e8d8c1;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: .7px;
+}
+
+.announcement-bar span {
+    margin-left: 10px;
+    color: #c7b6a2;
+}
+
+/* HEADER */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 17px 5%;
+    background: rgba(248,245,239,.97);
+    border-bottom: 1px solid rgba(185,149,96,.17);
+    backdrop-filter: blur(14px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+}
+
+.brand-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--serif);
+    font-size: 27px;
+}
+
+.brand-name {
+    color: var(--brown);
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+.brand-name span {
+    display: block;
+    margin-top: 5px;
+    color: #99764b;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 5px;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.2vw, 30px);
+}
+
+.nav-link {
+    position: relative;
+    color: #6c594b;
+    font-size: 11px;
+    transition: color .2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #9a7042;
+}
+
+.nav-link.active::after {
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+    height: 1px;
+    background: var(--gold);
+    content: "";
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.text-link {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.text-link span {
+    color: var(--gold);
+}
+
+.header-order-button {
+    padding: 11px 16px;
+    background: var(--brown);
+    color: var(--cream);
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.header-order-button:hover {
+    background: var(--brown-soft);
+}
+
+.auren-menu-toggle {
+    width: 41px;
+    height: 41px;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #ddcbb2;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.auren-menu-toggle span {
+    width: 100%;
+    height: 2px;
+    background: var(--brown);
+    transition: transform .25s;
+}
+
+/* HERO */
+.hero {
+    position: relative;
+    min-height: min(760px, 83vh);
+    min-height: min(760px, 83svh);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 90px 9%;
+    background:
+        linear-gradient(90deg, rgba(28,20,15,.88), rgba(28,20,15,.53) 56%, rgba(28,20,15,.15)),
+        url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=2000&q=90") center 55%/cover;
+    color: var(--white);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+}
+
+.hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e0c79f;
+}
+
+.hero-eyebrow span,
+.gold-dot {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+.hero h1 {
+    margin: 27px 0 23px;
+    font-family: var(--serif);
+    font-size: clamp(48px, 7.2vw, 91px);
+    line-height: 1.06;
+    letter-spacing: -1.5px;
+}
+
+.hero h1 em {
+    color: #ddc49a;
+}
+
+.hero-description {
+    max-width: 440px;
+    color: #e1d6ca;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 32px;
+}
+
+.hero-note {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 58px;
+    color: #e0d0bd;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.hero-note-line {
+    width: 42px;
+    height: 1px;
+    background: var(--gold);
+}
+
+.hero-side-note {
+    position: absolute;
+    right: 35px;
+    bottom: 100px;
+    color: #e0d0bd;
+    font-size: 9px;
+    letter-spacing: 2px;
+    writing-mode: vertical-rl;
+}
+
+.scroll-cue {
+    position: absolute;
+    bottom: 28px;
+    left: 9%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e0d0bd;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.scroll-cue span {
+    width: 27px;
+    height: 1px;
+    background: var(--gold);
+}
+
+/* WELCOME */
+.welcome {
+    position: relative;
+    display: grid;
+    grid-template-columns: .7fr 1.1fr 1fr;
+    align-items: center;
+    gap: 35px;
+    background: var(--cream);
+}
+
+.welcome-label {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-number {
+    color: #9b7549;
+    font-size: 9px;
+    letter-spacing: 1.6px;
+}
+
+.tiny-rule {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+}
+
+.welcome-copy h2 {
+    margin: 20px 0;
+}
+
+.large-copy {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2.1;
+}
+
+.welcome-copy .underlined-link {
+    margin-top: 25px;
+}
+
+.image-frame {
+    position: relative;
+    min-width: 0;
+}
+
+.welcome-image img {
+    height: 430px;
+}
+
+.image-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(33,26,22,.82);
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 1.2px;
+}
+
+.welcome-stamp {
+    position: absolute;
+    right: 34%;
+    bottom: 45px;
+    width: 104px;
+    height: 104px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    background: var(--cream);
+    color: #89663f;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+}
+
+.welcome-stamp strong {
+    color: var(--brown);
+}
+
+.welcome-stamp b {
+    font-size: 16px;
+}
+
+/* CATEGORY */
+.category-section {
+    background: #f0e8dc;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    margin-bottom: 42px;
+}
+
+.section-heading h2 {
+    margin-top: 14px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 18px;
+}
+
+.category-card {
+    position: relative;
+    min-height: 360px;
+    overflow: hidden;
+    background: var(--brown);
+    color: var(--white);
+}
+
+.category-card::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(25,17,12,.9), transparent 68%);
+    content: "";
+    transition: background .3s;
+}
+
+.category-card img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    transition: transform .65s;
+}
+
+.category-card:hover img {
+    transform: scale(1.07);
+}
+
+.category-number {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+    z-index: 2;
+    color: #fff;
+    font-size: 10px;
+}
+
+.category-info {
+    position: absolute;
+    right: 20px;
+    bottom: 22px;
+    left: 20px;
+    z-index: 2;
+}
+
+.category-info > span:first-child {
+    color: #ddc49a;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.category-info h3 {
+    margin-top: 5px;
+    font-family: var(--serif);
+    font-size: 25px;
+}
+
+.circle-arrow {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 37px;
+    height: 37px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 50%;
+    transition: background .2s;
+}
+
+.category-card:hover .circle-arrow {
+    background: var(--gold);
+    color: var(--brown);
+}
+
+/* SIGNATURE */
+.signature-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 620px;
+    background: var(--brown);
+    color: var(--cream);
+}
+
+.signature-image {
+    position: relative;
+    min-height: 530px;
+    overflow: hidden;
+}
+
+.signature-image img {
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.floating-tag {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    padding: 13px 17px;
+    background: var(--cream);
+    color: var(--brown);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+
+.floating-tag b {
+    margin-left: 10px;
+    color: var(--gold);
+}
+
+.signature-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 75px 10%;
+}
+
+.signature-copy .eyebrow {
+    color: #d6b887;
+}
+
+.signature-kicker {
+    margin-top: 32px;
+    color: #b6a08b;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.signature-copy h2 {
+    margin: 15px 0 23px;
+    font-size: clamp(38px, 4.4vw, 57px);
+}
+
+.body-copy {
+    max-width: 440px;
+    color: #c9bbae;
+    font-size: 12px;
+    line-height: 2.1;
+}
+
+.signature-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    width: 100%;
+    margin: 32px 0;
+}
+
+.signature-details > div {
+    display: flex;
+    gap: 12px;
+}
+
+.signature-details > div > span {
+    color: var(--gold);
+    font-size: 11px;
+}
+
+.signature-details p {
+    font-size: 11px;
+}
+
+.signature-details small {
+    color: #b7a697;
+    font-size: 10px;
+}
+
+/* FEATURED PRODUCTS */
+.featured-section {
+    background: var(--cream);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 22px;
+}
+
+.product-card {
+    min-width: 0;
+}
+
+.product-image {
+    position: relative;
+    display: block;
+    height: 300px;
+    overflow: hidden;
+    background: #e8ddd0;
+    cursor: pointer;
+}
+
+.product-image img {
+    height: 100%;
+    transition: transform .55s;
+}
+
+.product-image:hover img {
+    transform: scale(1.06);
+}
+
+.product-badge {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    z-index: 1;
+    padding: 7px 9px;
+    background: var(--brown);
+    color: var(--cream);
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.badge-light {
+    background: var(--cream);
+    color: var(--brown);
+}
+
+.badge-green {
+    background: #687458;
+    color: white;
+}
+
+.product-view {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 13px;
+    background: rgba(33,26,22,.87);
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform .3s;
+}
+
+.product-image:hover .product-view,
+.product-image:focus-visible .product-view {
+    transform: translateY(0);
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 19px;
+    color: #a0876d;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.product-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.product-title-row h3 {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.4;
+}
+
+.product-price {
+    padding-top: 5px;
+    color: #8b6841;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.product-card > p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.menu-note {
+    margin-top: 35px;
+    color: #8d7c6e;
+    font-size: 10px;
+    text-align: center;
+}
+
+/* STORY */
+.story-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    gap: 7%;
+    overflow: hidden;
+    padding: 100px 8%;
+    background: #30231b;
+    color: var(--cream);
+}
+
+.story-backdrop {
+    position: absolute;
+    top: 10px;
+    left: -30px;
+    color: rgba(255,255,255,.025);
+    font-family: var(--serif);
+    font-size: clamp(130px, 23vw, 330px);
+    pointer-events: none;
+}
+
+.story-content {
+    position: relative;
+    z-index: 1;
+}
+
+.story-content .eyebrow {
+    color: #d9bd8d;
+}
+
+.story-content h2 {
+    margin: 22px 0;
+    font-size: clamp(40px, 5vw, 65px);
+}
+
+.story-content > p:not(.eyebrow) {
+    max-width: 500px;
+    color: #cdbfb2;
+    font-size: 13px;
+    line-height: 2.1;
+}
+
+.story-content .button {
+    margin-top: 29px;
+}
+
+.story-image {
+    position: relative;
+    min-height: 420px;
+}
+
+.story-image img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+}
+
+.story-image-label {
+    position: absolute;
+    right: -18px;
+    bottom: 22px;
+    padding: 14px 18px;
+    background: var(--gold);
+    color: var(--brown);
+    font-size: 9px;
+    letter-spacing: 1.3px;
+}
+
+/* VALUES */
+.values-section {
+    background: #f0e8dc;
+}
+
+.centered-heading {
+    justify-content: center;
+    text-align: center;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 20px;
+}
+
+.value-card {
+    position: relative;
+    min-height: 250px;
+    padding: 35px 27px;
+    border: 1px solid #e0d2c1;
+    background: rgba(255,255,255,.25);
+    transition: transform .25s, border-color .25s;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.value-icon {
+    color: #a17a4a;
+    font-size: 25px;
+}
+
+.value-number {
+    position: absolute;
+    top: 28px;
+    right: 27px;
+    color: #bda78e;
+    font-size: 10px;
+}
+
+.value-card h3 {
+    margin: 26px 0 12px;
+    font-family: var(--serif);
+    font-size: 23px;
+}
+
+.value-card p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+}
+
+/* VISIT */
+.visit-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 8%;
+    background: var(--cream);
+}
+
+.visit-image {
+    position: relative;
+    min-height: 490px;
+}
+
+.visit-image img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+}
+
+.visit-image-stamp {
+    position: absolute;
+    right: -20px;
+    bottom: 25px;
+    padding: 17px 21px;
+    background: var(--gold);
+    color: var(--brown);
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.visit-copy h2 {
+    margin: 18px 0;
+}
+
+.visit-copy > p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+}
+
+.visit-info {
+    display: grid;
+    gap: 20px;
+    margin: 28px 0;
+}
+
+.visit-info > div {
+    display: flex;
+    align-items: start;
+    gap: 15px;
+}
+
+.info-icon {
+    width: 37px;
+    height: 37px;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid #ddcbb2;
+    color: #987247;
+}
+
+.visit-info strong {
+    display: block;
+    font-size: 12px;
+}
+
+.visit-info small {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* ORDER CTA */
+.order-banner {
+    position: relative;
+    overflow: hidden;
+    padding: 95px 20px;
+    background: #30231b;
+    color: var(--cream);
+    text-align: center;
+}
+
+.order-banner-pattern {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(185,149,96,.12), transparent 65%);
+    pointer-events: none;
+}
+
+.order-banner > *:not(.order-deco) {
+    position: relative;
+}
+
+.order-banner .eyebrow {
+    color: #d8bd8e;
+}
+
+.order-banner h2 {
+    margin: 20px 0;
+    font-size: clamp(40px, 5.5vw, 68px);
+}
+
+.order-banner > p:not(.eyebrow) {
+    max-width: 430px;
+    margin: 0 auto;
+    color: #cdbfb2;
+    font-size: 12px;
+}
+
+.order-banner .button {
+    margin-top: 28px;
+}
+
+.order-deco {
+    position: absolute;
+    right: 7%;
+    bottom: -100px;
+    color: rgba(255,255,255,.035);
+    font-family: var(--serif);
+    font-size: 300px;
+    pointer-events: none;
+}
+
+/* CONTACT */
+.contact-preview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background: #e9dfd1;
+}
+
+.contact-preview h2 {
+    margin: 13px 0;
+    font-size: clamp(31px, 3.5vw, 45px);
+}
+
+.contact-preview > div > p:last-child {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--gold);
+    color: var(--brown);
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 22px);
+    overflow-wrap: anywhere;
+}
+
+.contact-email span {
+    color: #a07845;
+}
+
+/* FOOTER */
+.auren-footer {
+    padding: 65px 7% 22px;
+    background: #241b16;
+    color: #f5eee4;
+}
+
+.auren-footer-main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 48px;
+}
+
+.auren-footer-brand {
+    max-width: 330px;
+}
+
+.auren-footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #f5eee4;
+    font-family: var(--serif);
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.auren-footer-mark {
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--gold);
+    color: #d7b57f;
+    font-size: 25px;
+}
+
+.auren-footer-logo small {
+    display: block;
+    margin-top: 4px;
+    color: #c5a777;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 5px;
+}
+
+.auren-footer-brand > p {
+    margin: 22px 0;
+    color: #cfc0b1;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.auren-footer-story {
+    display: inline-flex;
+    gap: 12px;
+    color: #d7b57f;
+    font-size: 11px;
+}
+
+.auren-footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.auren-footer-column h3 {
+    margin: 5px 0 9px;
+    color: #e0c398;
+    font-family: var(--serif);
+    font-size: 18px;
+}
+
+.auren-footer-column > a {
+    color: #d2c5b8;
+    font-size: 11px;
+    transition: color .2s, transform .2s;
+}
+
+.auren-footer-column > a:hover {
+    color: #e2bd83;
+    transform: translateX(3px);
+}
+
+.auren-footer-note {
+    margin-top: 8px;
+    color: #d2c5b8;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.auren-footer-note span {
+    display: block;
+    color: #d7b57f;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.auren-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 22px;
+    border-top: 1px solid rgba(230,208,178,.2);
+}
+
+.auren-footer-bottom p {
+    color: #bcae9f;
+    font-size: 10px;
+}
+
+.auren-footer-mini,
+.auren-back-top {
+    color: #d7b57f;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* SIDE MENU */
+.auren-menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1998;
+    background: rgba(24,17,13,.63);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s, visibility .3s;
+}
+
+.auren-menu-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.auren-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1999;
+    width: min(390px, 88vw);
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    background: var(--cream);
+    color: var(--text);
+    box-shadow: 18px 0 55px rgba(0,0,0,.15);
+    transform: translateX(-105%);
+    transition: transform .35s ease;
+}
+
+.auren-sidebar.is-open {
+    transform: translateX(0);
+}
+
+.auren-sidebar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.auren-sidebar-brand {
+    font-family: var(--serif);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.auren-sidebar-brand span {
+    display: block;
+    color: #a07845;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 5px;
+}
+
+.auren-menu-close,
+.auren-dialog-close {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--brown);
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.auren-sidebar-label {
+    margin: 23px 0 11px;
+    color: #a07845;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.auren-sidebar-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.auren-sidebar-links > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 2px;
+    border-bottom: 1px solid #e9e0d5;
+    color: #493329;
+    font-size: 12px;
+    transition: color .2s, padding .2s;
+}
+
+.auren-sidebar-links > a span {
+    color: #a07845;
+}
+
+.auren-sidebar-links > a:hover {
+    padding-left: 8px;
+    color: #a07845;
+}
+
+.auren-sidebar-divider {
+    margin-top: 10px;
+    border-top: 1px solid #d8c8b4;
+}
+
+.auren-sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 25px;
+    color: #826b58;
+    font-size: 10px;
+}
+
+/* JAVASCRIPT MODAL */
+.auren-dialog-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+    background: rgba(27,19,14,.72);
+}
+
+.auren-dialog-backdrop.is-visible {
+    display: flex;
+}
+
+.auren-dialog {
+    position: relative;
+    width: min(610px, 100%);
+    max-height: 90dvh;
+    overflow-y: auto;
+    padding: clamp(27px, 5vw, 45px);
+    border: 1px solid #d4b17d;
+    background: var(--cream);
+    color: var(--text);
+    box-shadow: 0 25px 90px rgba(0,0,0,.3);
+    animation: aurenDialogIn .25s ease;
+}
+
+
+
+
+.auren-dialog-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.auren-dialog-kicker {
+    display: block;
+    padding-right: 40px;
+    color: #a07845;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.auren-dialog h2 {
+    margin: 16px 0;
+    font-size: clamp(29px, 5vw, 40px);
+}
+
+.auren-dialog h2 em {
+    color: #a07845;
+}
+
+.auren-dialog p {
+    margin: 12px 0;
+    color: #725e4e;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.auren-dialog-action {
+    display: inline-flex;
+    margin-top: 12px;
+    padding: 12px 18px;
+    background: var(--brown);
+    color: var(--cream);
+    font-size: 11px;
+}
+
+.auren-dialog-action:hover {
+    background: var(--brown-soft);
+}
+
+.auren-dialog-product-image {
+    max-height: 250px;
+    margin: 17px 0;
+    object-fit: cover;
+}
+
+.auren-dialog-price {
+    color: #9b7549 !important;
+    font-size: 16px !important;
+    font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    .site-header {
+        gap: 15px;
+        padding-inline: 3%;
+    }
+
+    .main-nav {
+        gap: 14px;
+    }
+
+    .main-nav .nav-link {
+        font-size: 10px;
+    }
+
+    .header-actions {
+        gap: 10px;
+    }
+
+    .header-actions .text-link {
+        display: none;
+    }
+
+    .category-card {
+        min-height: 310px;
+    }
+
+    .product-image {
+        height: 245px;
+    }
+
+    .welcome {
+        grid-template-columns: .7fr 1fr 1fr;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 850px) {
+    .main-nav {
+        display: none;
+    }
+
+    .site-header {
+        justify-content: flex-start;
+    }
+
+    .brand {
+        margin-right: auto;
+    }
+
+    .welcome {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .welcome-label {
+        grid-column: 1 / -1;
+    }
+
+    .welcome-stamp {
+        right: 40%;
+    }
+
+    .category-grid,
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .category-card {
+        min-height: 350px;
+    }
+
+    .product-image {
+        height: 310px;
+    }
+
+    .signature-copy {
+        padding: 55px 8%;
+    }
+
+    .signature-details {
+        grid-template-columns: 1fr;
+    }
+
+    .story-section {
+        gap: 35px;
+    }
+
+    .story-image {
+        min-height: 350px;
+    }
+
+    .auren-footer-main {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 35px 25px;
+    }
+}
+
+@media (max-width: 560px) {
+    .announcement-bar {
+        font-size: 9px;
+    }
+
+    .announcement-bar span {
+        display: none;
+    }
+
+    .site-header {
+        gap: 10px;
+        padding: 12px 4%;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .brand-mark {
+        width: 36px;
+        height: 36px;
+        font-size: 23px;
+    }
+
+    .brand-name {
+        font-size: 17px;
+    }
+
+    .brand-name span {
+        font-size: 8px;
+        letter-spacing: 4px;
+    }
+
+    .auren-menu-toggle {
+        width: 37px;
+        height: 37px;
+        padding: 9px;
+    }
+
+    .header-order-button {
+        padding: 10px;
+        font-size: 9px;
+    }
+
+    .section-pad {
+        padding: 65px 6%;
+    }
+
+    .hero {
+        min-height: 650px;
+        padding: 75px 7%;
+        background-position: 58% center;
+    }
+
+    .hero h1 {
+        font-size: clamp(45px, 12vw, 65px);
+    }
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+    .hero-buttons {
+        align-items: stretch;
+        flex-direction: column;
+        max-width: 260px;
+    }
+
+    .hero-note {
+        margin-top: 38px;
+        font-size: 8px;
+    }
+
+    .hero-side-note {
+        right: 13px;
+        bottom: 95px;
+        font-size: 8px;
+    }
+
+    .welcome {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .welcome-label {
+        grid-column: auto;
+    }
+
+    .welcome-image img {
+        height: 330px;
+    }
+
+    .welcome-stamp {
+        right: 12px;
+        bottom: 290px;
+        width: 82px;
+        height: 82px;
+        font-size: 7px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 28px;
+    }
+
+    .category-grid {
+        gap: 12px;
+    }
+
+    .category-card {
+        min-height: 245px;
+    }
+
+    .category-info {
+        right: 12px;
+        bottom: 15px;
+        left: 12px;
+    }
+
+    .category-info h3 {
+        max-width: 80%;
+        font-size: 20px;
+    }
+
+    .category-info > span:first-child {
+        font-size: 7px;
+    }
+
+    .circle-arrow {
+        width: 31px;
+        height: 31px;
+    }
+
+    .signature-section {
+        grid-template-columns: 1fr;
+    }
+
+    .signature-image {
+        min-height: 350px;
+    }
+
+    .signature-copy {
+        padding: 55px 7%;
+    }
+
+    .signature-copy h2 {
+        font-size: 42px;
+    }
+
+    .signature-details {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .signature-details p {
+        font-size: 10px;
+    }
+
+    .product-grid {
+        gap: 25px 13px;
+    }
+
+    .product-image {
+        height: 220px;
+    }
+
+    .product-badge {
+        top: 8px;
+        left: 7px;
+        padding: 6px;
+        font-size: 7px;
+    }
+
+    .product-view {
+        position: static;
+        display: block;
+        padding: 9px 5px;
+        font-size: 9px;
+        transform: none;
+    }
+
+    .product-meta {
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 12px;
+        font-size: 7px;
+    }
+
+    .product-title-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .product-title-row h3 {
+        font-size: 19px;
+    }
+
+    .product-price {
+        padding-top: 0;
+    }
+
+    .product-card > p {
+        font-size: 10px;
+    }
+
+    .story-section {
+        grid-template-columns: 1fr;
+        padding: 65px 7%;
+    }
+
+    .story-image {
+        min-height: 310px;
+        margin-right: 12px;
+    }
+
+    .story-image-label {
+        right: -12px;
+        font-size: 8px;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .value-card {
+        min-height: 210px;
+    }
+
+    .visit-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .visit-image {
+        min-height: 350px;
+        margin-right: 12px;
+    }
+
+    .visit-image-stamp {
+        right: -12px;
+    }
+
+    .order-banner {
+        padding: 70px 7%;
+    }
+
+    .contact-preview {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .auren-footer {
+        padding: 45px 6% 20px;
+    }
+
+    .auren-footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px 17px;
+    }
+
+    .auren-footer-brand {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+
+    .auren-footer-column h3 {
+        font-size: 16px;
+    }
+
+    .auren-footer-column > a,
+    .auren-footer-note {
+        font-size: 10px;
+    }
+
+    .auren-footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="announcement-bar">
+    <p>A little pause, a better day. <span>Discover your new favourite cup.</span></p>
+</div>
+
+<header class="site-header">
+    <button class="auren-menu-toggle" id="aurenMenuToggle"
+            type="button" aria-label="Open website menu"
+            aria-expanded="false" aria-controls="aurenSidebar">
+        <span></span><span></span><span></span>
+    </button>
+
+    <a href="#home" class="brand" aria-label="AUREN Café Home">
+        <span class="brand-mark">A</span>
+        <span class="brand-name">AUREN <span>CAFÉ</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#story" class="nav-link" data-auren-action="story">Our Story</a>
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#signature" class="nav-link">Signature</a>
+        <a href="#visit" class="nav-link" data-auren-action="visit">Visit Us</a>
+    </nav>
+
+    <div class="header-actions">
+        <a href="#menu" class="text-link">Explore Menu <span>↗</span></a>
+        <a href="#order" class="header-order-button" data-auren-action="order">
+            Order Now ↗
+        </a>
+    </div>
+</header>
+
+<div class="auren-menu-overlay" id="aurenMenuOverlay"></div>
+
+<aside class="auren-sidebar" id="aurenSidebar"
+       aria-label="Website menu" aria-hidden="true">
+    <div class="auren-sidebar-top">
+        <a href="#home" class="auren-sidebar-brand">AUREN <span>CAFÉ</span></a>
+        <button type="button" id="aurenMenuClose" class="auren-menu-close"
+                aria-label="Close website menu">×</button>
+    </div>
+
+    <p class="auren-sidebar-label">DISCOVER AUREN</p>
+
+    <nav class="auren-sidebar-links">
+        <a href="#home">Home <span>↗</span></a>
+        <a href="#welcome">Welcome <span>↗</span></a>
+        <a href="#menu">Menu Categories <span>↗</span></a>
+        <a href="#signature">Signature Drinks <span>↗</span></a>
+        <a href="#full-menu">Featured Products <span>↗</span></a>
+        <a href="#story" data-auren-action="story">Our Story <span>↗</span></a>
+        <a href="#values">Our Values <span>↗</span></a>
+        <a href="#visit" data-auren-action="visit">Visit Us <span>↗</span></a>
+        <a href="#contact" data-auren-action="contact">Contact <span>↗</span></a>
+
+        <div class="auren-sidebar-divider"></div>
+        <p class="auren-sidebar-label">EXPLORE THE MENU</p>
+
+        <a href="hot-coffee.html">Hot Coffee <span>↗</span></a>
+        <a href="iced-drinks.html">Iced Drinks <span>↗</span></a>
+        <a href="bakery.html">Bakery & Bites <span>↗</span></a>
+        <a href="special-offers.html">Special Offers <span>↗</span></a>
+    </nav>
+
+    <div class="auren-sidebar-bottom">
+        <span>GOOD COFFEE. BETTER MOMENTS.</span>
+        <span>Made with care, served with soul.</span>
+    </div>
+</aside>
+
+
+<main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+        <!-- FIVE BACKGROUND SLIDES -->
+        <div class="hero-slides" aria-hidden="true">
+            <div class="hero-slide slide-1"></div>
+            <div class="hero-slide slide-2"></div>
+            <div class="hero-slide slide-3"></div>
+            <div class="hero-slide slide-4"></div>
+            <div class="hero-slide slide-5"></div>
+        </div>
+
+        <div class="hero-content">
+            <p class="eyebrow hero-eyebrow">
+                <span></span> YOUR DAILY RITUAL, REIMAGINED
+            </p>
+
+            <h1>Good coffee.<br><em>Better moments.</em></h1>
+
+            <p class="hero-description">
+                Thoughtfully sourced beans, beautifully crafted drinks,
+                and a space that makes you want to stay a little longer.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#menu" class="button button-gold">
+                    Explore Our Menu <span>↗</span>
+                </a>
+                <a href="#story" class="button button-outline"
+                   data-auren-action="story">Get to Know Us</a>
+            </div>
+
+            <div class="hero-note">
+                <span class="hero-note-line"></span>
+                <span>MADE WITH CARE. SERVED WITH SOUL.</span>
+            </div>
+        </div>
+
+        <div class="hero-side-note">SPECIALTY COFFEE · EST. 2024</div>
+
+        <a href="#welcome" class="scroll-cue">
+            <span></span> SCROLL TO DISCOVER
+        </a>
+
+    </section>
+
+
+    <!-- MENU CATEGORIES -->
+    <section class="category-section section-pad" id="menu">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">FIND YOUR KIND OF COMFORT</p>
+                <h2>Something for <em>every mood.</em></h2>
+            </div>
+            <a href="#full-menu" class="underlined-link">
+                View Featured Menu <span>↗</span>
+            </a>
+        </div>
+
+        <div class="category-grid">
+            <a href="hot-coffee.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?auto=format&fit=crop&w=900&q=85"
+                     alt="Freshly prepared hot espresso coffee" loading="lazy">
+                <span class="category-number">01</span>
+                <div class="category-info">
+                    <span>THE CLASSICS</span>
+                    <h3>Hot Coffee</h3>
+                    <span class="circle-arrow">↗</span>
+                </div>
+            </a>
+
+            <a href="iced-drinks.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85"
+                     alt="Refreshing iced coffee served in a glass" loading="lazy">
+                <span class="category-number">02</span>
+                <div class="category-info">
+                    <span>COOL & REFRESHING</span>
+                    <h3>Iced Drinks</h3>
+                    <span class="circle-arrow">↗</span>
+                </div>
+            </a>
+
+            <a href="bakery.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85"
+                     alt="Freshly baked breads and pastries" loading="lazy">
+                <span class="category-number">03</span>
+                <div class="category-info">
+                    <span>FRESH FROM THE OVEN</span>
+                    <h3>Bakery & Bites</h3>
+                    <span class="circle-arrow">↗</span>
+                </div>
+            </a>
+
+            <a href="special-offers.html" class="category-card">
+                <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=900&q=85"
+                     alt="Specialty latte prepared by a barista" loading="lazy">
+                <span class="category-number">04</span>
+                <div class="category-info">
+                    <span>MADE OUR WAY</span>
+                    <h3>House Specials</h3>
+                    <span class="circle-arrow">↗</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- SIGNATURE -->
+    <section class="signature-section" id="signature">
+        <div class="signature-image">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85"
+                 alt="Beautifully prepared specialty coffee" loading="lazy">
+            <span class="floating-tag">THE AUREN EDITION <b>✳</b></span>
+        </div>
+
+        <div class="signature-copy">
+            <p class="eyebrow"><span class="gold-dot"></span> A HOUSE FAVOURITE</p>
+            <p class="signature-kicker">01 — SIGNATURE SERIES</p>
+            <h2>Meet your new<br><em>little obsession.</em></h2>
+            <p class="body-copy">
+                Our signature drinks begin with good ingredients and end
+                with that first-sip smile. Balanced, memorable, and made
+                fresh whenever you order.
+            </p>
+
+            <div class="signature-details">
+                <div>
+                    <span>01</span>
+                    <p>Quality Ingredients<br><small>Picked with purpose</small></p>
+                </div>
+                <div>
+                    <span>02</span>
+                    <p>Made to Order<br><small>Never rushed, always fresh</small></p>
+                </div>
+            </div>
+
+            <a href="#full-menu" class="button button-gold">
+                Discover Our Signatures <span>↗</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="featured-section section-pad" id="full-menu">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">A FEW GOOD THINGS</p>
+                <h2>Meet the <em>usual suspects.</em></h2>
+            </div>
+            <a href="#menu" class="underlined-link">
+                Browse Categories <span>↗</span>
+            </a>
+        </div>
+
+        <div class="product-grid">
+
+            <article class="product-card"
+                     data-name="Velvet Latte"
+                     data-price="95"
+                     data-category="Espresso Bar"
+                     data-description="Silky milk, rich espresso, a little everyday luxury."
+                     data-image="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=800&q=85">
+                <a href="#product-velvet-latte" class="product-image" data-product-open>
+                    <span class="product-badge">BESTSELLER</span>
+                    <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=800&q=85"
+                         alt="Velvet latte topped with smooth milk foam" loading="lazy">
+                    <span class="product-view">Discover Drink ↗</span>
+                </a>
+                <div class="product-meta"><span>ESPRESSO BAR</span><span>01 / 04</span></div>
+                <div class="product-title-row">
+                    <h3>Velvet Latte</h3><span class="product-price">EGP 95</span>
+                </div>
+                <p>Silky milk, rich espresso, a little everyday luxury.</p>
+            </article>
+
+            <article class="product-card"
+                     data-name="Iced Spanish"
+                     data-price="110"
+                     data-category="Iced & Blended"
+                     data-description="Bold espresso meets creamy sweetness over ice."
+                     data-image="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=85">
+                <a href="#product-iced-spanish" class="product-image" data-product-open>
+                    <span class="product-badge badge-light">CHILLED FAVOURITE</span>
+                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=85"
+                         alt="Iced coffee with milk served over ice" loading="lazy">
+                    <span class="product-view">Discover Drink ↗</span>
+                </a>
+                <div class="product-meta"><span>ICED & BLENDED</span><span>02 / 04</span></div>
+                <div class="product-title-row">
+                    <h3>Iced Spanish</h3><span class="product-price">EGP 110</span>
+                </div>
+                <p>Bold espresso meets creamy sweetness over ice.</p>
+            </article>
+
+            <article class="product-card"
+                     data-name="Pistachio Cloud"
+                     data-price="125"
+                     data-category="Signature Series"
+                     data-description="A nutty, velvety treat with a beautifully soft finish."
+                     data-image="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=85">
+                <a href="#product-pistachio-cloud" class="product-image" data-product-open>
+                    <span class="product-badge badge-green">AUREN SPECIAL</span>
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=85"
+                         alt="Freshly prepared signature coffee" loading="lazy">
+                    <span class="product-view">Discover Drink ↗</span>
+                </a>
+                <div class="product-meta"><span>SIGNATURE SERIES</span><span>03 / 04</span></div>
+                <div class="product-title-row">
+                    <h3>Pistachio Cloud</h3><span class="product-price">EGP 125</span>
+                </div>
+                <p>A nutty, velvety treat with a beautifully soft finish.</p>
+            </article>
+
+            <article class="product-card"
+                     data-name="Butter Croissant"
+                     data-price="75"
+                     data-category="Bakery & Bites"
+                     data-description="Golden, flaky layers baked for your coffee break."
+                     data-image="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=85">
+                <a href="#product-butter-croissant" class="product-image" data-product-open>
+                    <span class="product-badge badge-light">BAKERY FRESH</span>
+                    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=85"
+                         alt="Golden freshly baked butter croissants" loading="lazy">
+                    <span class="product-view">Discover Bite ↗</span>
+                </a>
+                <div class="product-meta"><span>BAKERY & BITES</span><span>04 / 04</span></div>
+                <div class="product-title-row">
+                    <h3>Butter Croissant</h3><span class="product-price">EGP 75</span>
+                </div>
+                <p>Golden, flaky layers baked for your coffee break.</p>
+            </article>
+
+        </div>
+
+        <p class="menu-note">Menu items and prices are sample content for this project.</p>
+    </section>
+
+    <!-- STORY -->
+    <section class="story-section" id="story">
+        <div class="story-backdrop" aria-hidden="true">AUREN</div>
+
+        <div class="story-content">
+            <p class="eyebrow"><span class="gold-dot"></span> A NOTE FROM US</p>
+            <h2>It was never<br>just about <em>coffee.</em></h2>
+            <p>
+                It’s the first hello of the day. The catch-up that turns
+                into hours. The small reward after a long week. We built
+                AUREN around the moments that make an ordinary day feel
+                a little more yours.
+            </p>
+            <button type="button" class="button button-outline-light"
+                    data-auren-action="story">
+                Read Our Story <span>↗</span>
+            </button>
+        </div>
+
+        <div class="story-image">
+            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1100&q=85"
+                 alt="Barista preparing coffee in a warm café" loading="lazy">
+            <div class="story-image-label">GOOD THINGS TAKE A LITTLE TIME.</div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section section-pad" id="values">
+        <div class="section-heading centered-heading">
+            <div>
+                <p class="eyebrow">THE LITTLE THINGS MATTER</p>
+                <h2>Made with care, <em>every time.</em></h2>
+            </div>
+        </div>
+
+        <div class="values-grid">
+            <article class="value-card">
+                <span class="value-icon">✳</span><span class="value-number">01</span>
+                <h3>Good Beans, Always.</h3>
+                <p>We care about where our coffee comes from and how it makes its way into your cup.</p>
+            </article>
+            <article class="value-card">
+                <span class="value-icon">◌</span><span class="value-number">02</span>
+                <h3>Craft Over Shortcuts.</h3>
+                <p>Our drinks are prepared with attention, patience, and respect for the little details.</p>
+            </article>
+            <article class="value-card">
+                <span class="value-icon">⌂</span><span class="value-number">03</span>
+                <h3>A Seat for Everyone.</h3>
+                <p>Come to work, meet a friend, take a breath, or simply enjoy a good cup in peace.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="visit-section section-pad" id="visit">
+        <div class="visit-image">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=85"
+                 alt="Inviting café interior with tables and warm lighting" loading="lazy">
+            <span class="visit-image-stamp">YOUR TABLE<br>IS WAITING</span>
+        </div>
+
+        <div class="visit-copy">
+            <p class="eyebrow">COME ON IN</p>
+            <h2>Your favourite<br>corner is <em>closer.</em></h2>
+            <p>
+                Whether it’s your first visit or your hundredth,
+                there’s always a cup waiting to make the day better.
+            </p>
+
+            <div class="visit-info">
+                <div>
+                    <span class="info-icon">⌖</span>
+                    <p><strong>Find Your Way</strong>
+                       <small>Our café address will be added here.</small></p>
+                </div>
+                <div>
+                    <span class="info-icon">◷</span>
+                    <p><strong>When We're Brewing</strong>
+                       <small>Daily · 8:00 AM – 12:00 AM</small></p>
+                </div>
+            </div>
+
+            <button type="button" class="button button-dark"
+                    data-auren-action="visit">
+                Plan Your Visit <span>↗</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ORDER CTA -->
+    <section class="order-banner" id="order">
+        <div class="order-banner-pattern"></div>
+        <p class="eyebrow">YOUR NEXT GOOD MOMENT</p>
+        <h2>Make today a <em>coffee day.</em></h2>
+        <p>Pick your favourite, make it yours, and let us take care of the rest.</p>
+        <a href="#menu" class="button button-gold">Find Your Next Favourite <span>↗</span></a>
+        <span class="order-deco" aria-hidden="true">A.</span>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-preview section-pad" id="contact">
+        <div>
+            <p class="eyebrow">LET'S KEEP IN TOUCH</p>
+            <h2>A little note goes <em>a long way.</em></h2>
+            <p>For questions, collaborations, or just to say hello, we'd love to hear from you.</p>
+        </div>
+
+        <button type="button" class="contact-email" data-auren-action="contact">
+            Contact AUREN <span>↗</span>
+        </button>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="auren-footer" id="footer">
+    <div class="auren-footer-main">
+
+        <div class="auren-footer-brand">
+            <a href="#home" class="auren-footer-logo">
+                <span class="auren-footer-mark">A</span>
+                <span>AUREN <small>CAFÉ</small></span>
+            </a>
+            <p>
+                Thoughtfully crafted coffee, comforting bites,
+                and little moments worth slowing down for.
+            </p>
+            <a href="#story" class="auren-footer-story"
+               data-auren-action="story">
+                Get to know our story <span>↗</span>
+            </a>
+        </div>
+
+        <div class="auren-footer-column">
+            <h3>Explore</h3>
+            <a href="#home">Home</a>
+            <a href="#welcome">The AUREN Feeling</a>
+            <a href="#menu">Menu Categories</a>
+            <a href="#signature">Our Signatures</a>
+            <a href="#full-menu">Featured Products</a>
+            <a href="#values">Our Values</a>
+        </div>
+
+        <div class="auren-footer-column">
+            <h3>Our Menu</h3>
+            <a href="hot-coffee.html">Hot Coffee</a>
+            <a href="iced-drinks.html">Iced Drinks</a>
+            <a href="bakery.html">Bakery & Bites</a>
+            <a href="special-offers.html">Special Offers</a>
+        </div>
+
+        <div class="auren-footer-column">
+            <h3>Come Say Hello</h3>
+            <a href="#visit" data-auren-action="visit">Visit Our Café</a>
+            <a href="#contact" data-auren-action="contact">Contact Us</a>
+            <a href="#order" data-auren-action="order">Ordering Information</a>
+            <p class="auren-footer-note">
+                <span>OPENING HOURS</span>
+                Daily · 8:00 AM – 12:00 AM
+            </p>
+        </div>
+    </div>
+
+    <div class="auren-footer-bottom">
+        <a href="#home" class="auren-footer-mini">AUREN CAFÉ</a>
+        <p>© <span id="aurenYear"></span> AUREN Café. All rights reserved.</p>
+        <a href="#home" class="auren-back-top">Back to top ↑</a>
+    </div>
+</footer>
+
+<!-- DYNAMIC JAVASCRIPT DIALOG -->
+<div class="auren-dialog-backdrop" id="aurenDialogBackdrop"
+     role="presentation" aria-hidden="true">
+    <section class="auren-dialog" role="dialog" aria-modal="true"
+             aria-labelledby="aurenDialogTitle">
+        <button type="button" class="auren-dialog-close"
+                id="aurenDialogClose" aria-label="Close dialog">×</button>
+        <div id="aurenDialogContent"></div>
+    </section>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const menuButton = document.getElementById("aurenMenuToggle");
+    const sidebar = document.getElementById("aurenSidebar");
+    const overlay = document.getElementById("aurenMenuOverlay");
+    const menuClose = document.getElementById("aurenMenuClose");
+
+    const dialogBackdrop = document.getElementById("aurenDialogBackdrop");
+    const dialogClose = document.getElementById("aurenDialogClose");
+    const dialogContent = document.getElementById("aurenDialogContent");
+
+    let lastFocusedElement = null;
+
+    document.getElementById("aurenYear").textContent =
+        new Date().getFullYear();
+
+    function updateBodyScroll() {
+        const menuIsOpen = sidebar.classList.contains("is-open");
+        const dialogIsOpen = dialogBackdrop.classList.contains("is-visible");
+        document.body.classList.toggle("no-scroll", menuIsOpen || dialogIsOpen);
+    }
+
+    // Side menu.
+    function openMenu() {
+        sidebar.classList.add("is-open");
+        overlay.classList.add("is-visible");
+        menuButton.setAttribute("aria-expanded", "true");
+        sidebar.setAttribute("aria-hidden", "false");
+        updateBodyScroll();
+        menuClose.focus();
+    }
+
+    function closeMenu() {
+        sidebar.classList.remove("is-open");
+        overlay.classList.remove("is-visible");
+        menuButton.setAttribute("aria-expanded", "false");
+        sidebar.setAttribute("aria-hidden", "true");
+        updateBodyScroll();
+    }
+
+    menuButton.addEventListener("click", openMenu);
+    menuClose.addEventListener("click", closeMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    // Reusable dialog for stories, visits, contact and product details.
+    function openDialog(title, content, kicker) {
+        lastFocusedElement = document.activeElement;
+
+        const safeKicker = document.createElement("span");
+        safeKicker.className = "auren-dialog-kicker";
+        safeKicker.textContent = kicker || "AUREN CAFÉ";
+
+        const heading = document.createElement("h2");
+        heading.id = "aurenDialogTitle";
+
+        // Allow emphasis tags in the heading only.
+        heading.innerHTML = title;
+
+        dialogContent.replaceChildren(safeKicker, heading);
+
+        const body = document.createElement("div");
+        body.innerHTML = content;
+        dialogContent.appendChild(body);
+
+        dialogBackdrop.classList.add("is-visible");
+        dialogBackdrop.setAttribute("aria-hidden", "false");
+        updateBodyScroll();
+        dialogClose.focus();
+    }
+
+    function closeDialog() {
+        dialogBackdrop.classList.remove("is-visible");
+        dialogBackdrop.setAttribute("aria-hidden", "true");
+        updateBodyScroll();
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+            lastFocusedElement.focus();
+        }
+    }
+
+    dialogClose.addEventListener("click", closeDialog);
+
+    dialogBackdrop.addEventListener("click", function (event) {
+        if (event.target === dialogBackdrop) {
+            closeDialog();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+            closeMenu();
+            closeDialog();
+        }
+    });
+
+    const dialogContentByAction = {
+        story: {
+            title: "It was never just about <em>coffee.</em>",
+            kicker: "OUR STORY",
+            content: `
+                <p>
+                    AUREN Café is built around the little moments that make
+                    an ordinary day feel special: a warm welcome, a carefully
+                    prepared drink, and a place to slow down.
+                </p>
+                <p>
+                    We believe a good café is more than what's in the cup.
+                    It's the conversations, the familiar faces, and the comfort
+                    of having a corner that feels like your own.
+                </p>
+                <p>
+                    Every visit is an invitation to pause, enjoy the moment,
+                    and leave with a little more warmth than you arrived with.
+                </p>
+                <a class="auren-dialog-action" href="#values"
+                   data-auren-dialog-link>Discover Our Values ↗</a>
+            `
+        },
+
+        visit: {
+            title: "Your table is <em>waiting.</em>",
+            kicker: "VISIT AUREN",
+            content: `
+                <p>
+                    We would love to welcome you for your favourite coffee,
+                    a fresh bite, or a relaxed catch-up.
+                </p>
+                <p>
+                    <strong>Opening hours</strong><br>
+                    Daily · 8:00 AM – 12:00 AM
+                </p>
+                <p>
+                    The café address has not been provided yet, so we cannot
+                    create an accurate map or directions link.
+                </p>
+                <a class="auren-dialog-action" href="#contact"
+                   data-auren-dialog-link>Contact Information ↗</a>
+            `
+        },
+
+        contact: {
+            title: "Let's keep <em>in touch.</em>",
+            kicker: "CONTACT AUREN",
+            content: `
+                <p>
+                    Have a question or want to discuss a collaboration?
+                    We would be happy to hear from you.
+                </p>
+                <p>
+                    Add your real business email address and social media links
+                    to the page when they are ready.
+                </p>
+                <a class="auren-dialog-action" href="#visit"
+                   data-auren-dialog-link>Visit Information ↗</a>
+            `
+        },
+
+        order: {
+            title: "Your next good <em>moment.</em>",
+            kicker: "ORDER INFORMATION",
+            content: `
+                <p>
+                    Explore our coffee, chilled drinks, bakery treats,
+                    and house specials to find your next favourite.
+                </p>
+                <p>
+                    Online ordering and payment are not connected to this
+                    homepage yet. This window provides information only.
+                </p>
+                <a class="auren-dialog-action" href="#menu"
+                   data-auren-dialog-link>Explore Menu Categories ↗</a>
+            `
+        }
+    };
+
+    // Actions that open the corresponding content.
+    document.addEventListener("click", function (event) {
+        const actionLink = event.target.closest("[data-auren-action]");
+        if (!actionLink) return;
+
+        const action = actionLink.dataset.aurenAction;
+        const data = dialogContentByAction[action];
+        if (!data) return;
+
+        event.preventDefault();
+        closeMenu();
+        openDialog(data.title, data.content, data.kicker);
+    });
+
+    // Product cards open individual product information.
+    document.querySelectorAll("[data-product-open]").forEach(function (link) {
+        link.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const card = link.closest(".product-card");
+            if (!card) return;
+
+            const name = card.dataset.name || "Featured Item";
+            const price = card.dataset.price || "";
+            const category = card.dataset.category || "AUREN MENU";
+            const description = card.dataset.description || "";
+            const imageUrl = card.dataset.image || "";
+
+            const imageMarkup = imageUrl
+                ? `<img class="auren-dialog-product-image"
+                     src="${imageUrl}" alt="${name}">`
+                : "";
+
+            const priceMarkup = price
+                ? `<p class="auren-dialog-price">EGP ${price}</p>`
+                : "";
+
+            const content = `
+                ${imageMarkup}
+                <p>${description}</p>
+                ${priceMarkup}
+                <p>
+                    For ordering details, please contact the café directly.
+                </p>
+                <a class="auren-dialog-action" href="#contact"
+                   data-auren-dialog-link>Contact AUREN ↗</a>
+            `;
+
+            openDialog(name, content, category);
+        });
+    });
+
+    // Internal links inside the dialog close it and scroll to the section.
+    document.addEventListener("click", function (event) {
+        const internalLink = event.target.closest("[data-auren-dialog-link]");
+        if (!internalLink) return;
+
+        const targetId = internalLink.getAttribute("href");
+        if (!targetId || !targetId.startsWith("#")) return;
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        event.preventDefault();
+        closeDialog();
+        closeMenu();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    // Smooth scroll only when an in-page target exists.
+    document.querySelectorAll('a[href^="#"]:not([data-auren-action]):not([data-product-open]):not([data-auren-dialog-link])')
+        .forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                const targetId = link.getAttribute("href");
+                if (!targetId || targetId === "#") return;
+
+                const target = document.querySelector(targetId);
+                if (!target) return;
+
+                event.preventDefault();
+                closeMenu();
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            });
+        });
+
+    // Highlight the current main navigation section while scrolling.
+    const observedSections = document.querySelectorAll(
+        "#home, #story, #menu, #signature, #visit"
+    );
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+
+                document.querySelectorAll(".main-nav .nav-link").forEach(function (link) {
+                    link.classList.remove("active");
+                });
+
+                const activeLink = document.querySelector(
+                    '.main-nav .nav-link[href="#' + entry.target.id + '"]'
+                );
+
+                if (activeLink) activeLink.classList.add("active");
+            });
+        }, { rootMargin: "-30% 0px -60% 0px" });
+
+        observedSections.forEach(function (section) {
+            observer.observe(section);
+        });
+    }
+});
+</script>
+
+</body>
+</html>
